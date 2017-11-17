@@ -1,6 +1,8 @@
 package com.example.kukiat.noti;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -35,6 +38,7 @@ public class BackgroudService extends Service{
 
     @Override
     public void onCreate() {
+        microgear.disconnect();
         Log.i("service", "create BackgroudService");
     }
 
@@ -46,7 +50,6 @@ public class BackgroudService extends Service{
         microgear.connect(appid, key, secret, alias);
         microgear.setCallback(callback);
         microgear.subscribe("message");
-
         Log.i("service", "onStartCommand BackgroudService");
 
         handler = new Handler() {
@@ -66,6 +69,7 @@ public class BackgroudService extends Service{
         Log.i("service", "destroy BackgroudService");
         super.onDestroy();
     }
+
     class MicrogearCallBack implements MicrogearEventListener {
         @Override
         public void onConnect() {
@@ -89,12 +93,11 @@ public class BackgroudService extends Service{
         public void onPresent(String token) {
 //            Message msg = handler.obtainMessage();
 //            Bundle bundle = new Bundle();
-
+//
 //            bundle.putString("myKey", "New friend Connect :"+ token);
-
+//
 //            msg.setData(bundle);
 //            handler.sendMessage(msg);
-//            Log.i("present","New friend Connect :"+ token);
         }
 
         @Override

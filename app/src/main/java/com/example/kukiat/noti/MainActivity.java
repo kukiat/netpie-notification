@@ -1,43 +1,43 @@
 package com.example.kukiat.noti;
 
-import android.app.Notification;
 import android.app.NotificationManager;
-import android.content.Context;
+import android.app.PendingIntent;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
-
-import io.netpie.microgear.Microgear;
-import io.netpie.microgear.MicrogearEventListener;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Microgear microgear = new Microgear(this);
-    private String appid = "noti";
-    private String key = "6xeLdlHHWBuM49O";
-    private String secret = "tzTRtxJbuejASaIBHWD3snUa3";
-    private String alias = "client";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-    }
-
-    public void sendNoti(View v) {
-        Log.i("click", "test");
-    }
-    public void startService(View v) {
         startService(new Intent(MainActivity.this, BackgroudService.class));
+        Button b = (Button)findViewById(R.id.button);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNotification();
+            }
+        });
     }
 
+    public void addNotification() {
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        NotificationCompat.Builder n =
+                new NotificationCompat.Builder(this)
+                        .setContentTitle("My notification")
+                        .setContentText("Hello World!")
+                        .setContentIntent(pIntent);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0, n.build());
+    }
 }
 
