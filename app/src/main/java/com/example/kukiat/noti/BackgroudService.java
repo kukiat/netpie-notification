@@ -85,11 +85,7 @@ public class BackgroudService extends Service{
     class MicrogearCallBack implements MicrogearEventListener {
         @Override
         public void onConnect() {
-            Message msg = handler.obtainMessage();
-            Bundle bundle = new Bundle();
-            bundle.putString("myKey", "Now I'm connected with netpie message");
-            msg.setData(bundle);
-            handler.sendMessage(msg);
+            Log.i("service", "netpie connect");
         }
 
         @Override
@@ -103,53 +99,27 @@ public class BackgroudService extends Service{
 
         @Override
         public void onPresent(String token) {
-//            Message msg = handler.obtainMessage();
-//            Bundle bundle = new Bundle();
-//
-//            bundle.putString("myKey", "New friend Connect :"+ token);
-//
-//            msg.setData(bundle);
-//            handler.sendMessage(msg);
+            Log.i("service", "netpie"+token);
         }
 
         @Override
         public void onAbsent(String token) {
-            Message msg = handler.obtainMessage();
-            Bundle bundle = new Bundle();
-            bundle.putString("myKey", "Friend lost :"+token);
-            msg.setData(bundle);
-            handler.sendMessage(msg);
-            Log.i("service","Friend lost :"+token);
+            Log.i("service", "netpie absend");
         }
 
         @Override
         public void onDisconnect() {
-            Message msg = handler.obtainMessage();
-            Bundle bundle = new Bundle();
-            bundle.putString("myKey", "Disconnected");
-            msg.setData(bundle);
-            handler.sendMessage(msg);
-            Log.i("service","Disconnected");
+            Log.i("service", "netpie disconnect");
         }
 
         @Override
         public void onError(String error) {
-            Message msg = handler.obtainMessage();
-            Bundle bundle = new Bundle();
-            bundle.putString("myKey", "Exception : "+error);
-            msg.setData(bundle);
-            handler.sendMessage(msg);
-            Log.i("service","Exception : "+error);
+            Log.i("service", "netpie error");
         }
 
         @Override
         public void onInfo(String info) {
-            Message msg = handler.obtainMessage();
-            Bundle bundle = new Bundle();
-            bundle.putString("myKey", "Exception : "+info);
-            msg.setData(bundle);
-            handler.sendMessage(msg);
-            Log.i("service","Info : "+info);
+            Log.i("service", "netpie info");
         }
     }
 }
