@@ -35,18 +35,17 @@ public class BackgroudService extends Service{
 
     @Override
     public void onCreate() {
-        MicrogearCallBack callback = new MicrogearCallBack();
-
-        microgear.connect(appid, key, secret, alias);
-        microgear.setCallback(callback);
-        microgear.subscribe("message");
         Log.i("service", "create BackgroudService");
     }
 
     @SuppressLint("HandlerLeak")
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        MicrogearCallBack callback = new MicrogearCallBack();
 
+        microgear.connect(appid, key, secret, alias);
+        microgear.setCallback(callback);
+        microgear.subscribe("message");
 
         Log.i("service", "onStartCommand BackgroudService");
 
