@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-        NotificationCompat.Builder n =
-                new NotificationCompat.Builder(this)
+        NotificationCompat.Builder n = new NotificationCompat.Builder(this)
                         .setContentTitle("My notification")
                         .setContentText("Hello World!")
+                        .setSmallIcon(R.drawable.male)
                         .setContentIntent(pIntent);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
