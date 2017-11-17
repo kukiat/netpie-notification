@@ -38,7 +38,6 @@ public class BackgroudService extends Service{
 
     @Override
     public void onCreate() {
-        microgear.disconnect();
         Log.i("service", "create BackgroudService");
     }
 
